@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+      }
+
+      .wrap {
+         width: auto;
+         margin: 16px 48px;
+         text-align: center;
+      }
+
+      .wrap > *{
+         margin: 8px 0px 0px;
+      }
+
+      textarea:focus-visible {
+         outline: 0;
+      }
+
+      textarea {
+      padding: 10px 20px;
+      width: calc(100% - 20px * 2);
+      max-width: 100%;
+      line-height: 1.5;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 1px #999;
+      }
+
+      button.parsestart {
+         display: block;
+         height: 35px;
+         width: 100%;
+      }
+
+      .single-info {
+         margin: 0px 0px 8px;
+      }
+
+      .single-info button {
+         margin: 4px;
+         padding: 6px 12px;
+         font-size: var(--bs-btn-font-size);
+         font-weight: var(--bs-btn-font-weight);
+         line-height: var(--bs-btn-line-height);
+         color: var(--bs-btn-color);
+         text-align: center;
+         text-decoration: none;
+         vertical-align: middle;
+         cursor: pointer;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         user-select: none;
+      }
+   </style>
+</head>
+<body>
+   <div class="wrap">
+      <textarea rows="5" cols="30"></textarea>
+      <button class="parsestart">开始处理</button>
+      <div class="delivery-infos">
+         <!-- <div class="single-info">
+            <h1>1栋2014</h1>
+            <div class="buttons">
+               <button>猪肉十块钱</button>
+            </div>
+         </div> -->
+      </div>
+   </div>
+   <script src="./index.js"></script>
+</body>
+</html>
