@@ -2,7 +2,9 @@ let msg = new SpeechSynthesisUtterance();
 let speech = window.speechSynthesis; 
 let infos = document.querySelector(".delivery-infos");
 let rawText = document.querySelector("textarea");
+let pasteBtn = document.querySelector(".pastestart");
 let parseBtn = document.querySelector(".parsestart");
+
 
 msg.text = "无朗读文本"
 msg.pitch = 1
@@ -17,10 +19,41 @@ infos.addEventListener("click", function(e) {
    }
 })
 
-parseBtn.addEventListener("click", function(e) {
-   let parseRes = msgParse(rawText.value);
+pasteBtn.addEventListener("click", function(e) {   
+   navigator.clipboard.readText().then((copyText) => {
+      rawText.value = copyText;
 
+      let parseRes = msgParse(copyText);
+      fillElem(parseRes);
+
+      if (parseRes.length == 1) {
+         msg.text = copyText;
+         speech.speak(msg);
+      }
+   })
+})
+
+// parseBtn.addEventListener("click", function(e) {   
+//    rawText.focus();
+//    document.execCommand("paste");
+
+//    let parseRes = msgParse(rawText.value);
+//    fillElem(parseRes);
+
+//    if (parseRes.length == 1) {
+//       msg.text = rawText.value;
+//       speech.speak(msg);
+//    }
+// })
+
+parseBtn.addEventListener("click", function(e) {   
+   let parseRes = msgParse(rawText.value);
    fillElem(parseRes);
+
+   if (parseRes.length == 1) {
+      msg.text = rawText.value;
+      speech.speak(msg);
+   }
 })
 
 function msgParse(text) {
@@ -30,6 +63,18 @@ function msgParse(text) {
    let secpat = /\d. \D*(\d.*\d )(.*)/;
    
    let a = text.match(firpat);
+   
+   // 未识别出楼号/房号
+   if (a == null) {
+      result.push(["未识别出楼号/房号", [text]])
+      return result;
+   }
+   
+   // 仅识别出一条信息，接龙也许出错了
+   if (a.length == 1) {
+      result.push(["接龙也许出错了", [a[0]]]);
+      return result;
+   }
 
    for (let i = 0; i < a.length; i++) {
       let temp = [];

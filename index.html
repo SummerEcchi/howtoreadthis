@@ -34,10 +34,16 @@
       box-shadow: 1px 1px 1px #999;
       }
 
-      button.parsestart {
-         display: block;
+      .wrap .pastestart {
+         border-color: red;
          height: 35px;
-         width: 100%;
+         width: 65%;
+      }
+
+      .wrap .parsestart {
+         border-color: green;
+         height: 35px;
+         width: 30%;
       }
 
       .single-info {
@@ -64,6 +70,7 @@
 <body>
    <div class="wrap">
       <textarea rows="5" cols="30"></textarea>
+      <button class="pastestart">粘贴并开始处理</button>
       <button class="parsestart">开始处理</button>
       <div class="delivery-infos">
          <!-- <div class="single-info">
